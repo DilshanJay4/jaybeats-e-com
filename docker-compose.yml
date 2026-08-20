@@ -1,0 +1,38 @@
+services:
+  web:
+    build: .
+    container_name: jaybeats_web
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: jaybeats_db
+      DB_USER: root
+      DB_PASS: mysql
+    volumes:
+      - ./uploaded_img:/var/www/html/uploaded_img
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: jaybeats_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: jaybeats_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./jaybeats_db.sql:/docker-entrypoint-initdb.d/jaybeats_db.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmysql"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:

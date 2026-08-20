@@ -1,0 +1,39 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Text Editor Configuration
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Workspace Tooling, AI Metadata & Internal Docs
+.codewhale/
+.gemini/
+.agents/
+ARCHITECTURE.md
+AGENTS.md
+
+# Environment Configuration
+.env
+.env.*
+!.env.example
+
+# Logs and Temporary Files
+*.log
+scratch/
+tmp/
+*.tmp
+
+# Docker Data Volumes
+db_data/
+mysql_data/
